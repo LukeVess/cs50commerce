@@ -1,0 +1,49 @@
+{%extends "auctions/layout.html"%}
+
+{%block body%}
+<h2>{{item.name}}</h2>
+<img width="100px" height="100px" src="{{item.img.url}}" alt="{{ item.name }}">
+<h2>{{item.description}}</h2>
+<h2>{{item.actual_price}}</h2>
+
+
+{%if close%}
+    {%if not item.sold%}
+<!-- close que tem que aparecer para o dono e deve ficar estatico depois do bid-->
+<form action="{%url 'close' item_id=item.id%}" method="post">
+    {%csrf_token%}
+    {{close}}
+    <input type="submit"/>
+</form>
+    {%else%}
+    <h2>Vendido para {{item.owner}}</h2>
+    {%endif%}
+{%endif%}
+
+
+<form  action="{% url 'comment' item_id=item.id %}" method="post"> 
+    {% csrf_token %}
+    {{comment}}
+    <input type="submit"/>
+</form> 
+<hr>
+
+{%if not item.sold%}
+<form action="{% url 'bid' item_id=item.id %}" method="post">
+    {% csrf_token %}
+    {{bid}}
+<input type="submit"/>
+</form>
+{%else%}
+<p>Este item já foi vendido e não está disponível para lances.</p>
+{%endif%}
+
+<hr>
+
+{%for comment in comments%}
+    <p>{{comment.user.username}}</p>
+    <p>{{comment.comment}}</p>
+    <p>{{comment.created_at}}</p>
+    <hr>
+{%endfor%}
+{%endblock%}

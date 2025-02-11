@@ -1,0 +1,49 @@
+body {
+    padding: 10px;
+}
+
+#item_listing{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 8px 20px 30px #cecece;
+    width:250px;
+    
+}
+
+.truncate-text {
+    display: block; /* Ensures text-overflow works */
+    width: 100%; /* Constrain width */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides overflowing text */
+    text-overflow: ellipsis; /* Adds "..." when text overflows */
+}
+
+#item_name {
+    width: 100%; /* Ensures full width */
+    text-overflow: ellipsis;
+}
+
+#item_container {
+    display: flex;
+    align-items: flex-start; /* Aligns items closely */
+    flex-wrap: wrap;
+    gap: 100px;
+    width: 100%;
+}
+
+#item_image_list {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    box-shadow: 8px 20px 30px #cecece;
+    transition: width 0.3s, height 0.3s, box-shadow 0.3s;
+}
+
+#item_image_list:hover {
+    width: 175px;
+    height: 175px;
+    box-shadow: 16px 40px 60px #cecece;
+}

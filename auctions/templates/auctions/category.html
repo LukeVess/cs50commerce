@@ -1,0 +1,17 @@
+{%extends "auctions/layout.html"%}
+
+{%block body%}
+<form action="{% url 'category'%}" method="post"> 
+    {% csrf_token %}
+    {{category}}
+    <input type="submit"/>
+</form> 
+{%if items%}
+{%for item in items%}
+{{item.name}}
+{%endfor%}
+{%else%}
+<h1>No items</h1>
+{%endif%}
+
+{%endblock%}

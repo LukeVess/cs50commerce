@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div id="item_container">
+    {%for item in items%}
+    <div id="item_listing">
+    <a  id="item_name" href="{%url 'item_list' item_id=item.id%}">
+        <p class="truncate-text">{{item.name}}</p></a>
+    <a href="{%url 'item_list' item_id=item.id%}">
+    <img id="item_image_list" src="{{item.img.url}}" alt="{{ item.name }}">
+    </a>
+    <h1>US{{item.actual_price}}</h1>
+    <p>{{item.description}}</p>
+    <p>{{item.user.username}}</p>
+    <form  action="{% url 'watchlist' %}" method="post"> 
+        {% csrf_token %}
+    <button name="item" value="{{item.id}}">Watchlist</button>
+    </form> 
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

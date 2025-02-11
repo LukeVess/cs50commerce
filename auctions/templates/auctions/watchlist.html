@@ -1,0 +1,10 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {%for iten in items%}
+    <h2>{{iten.item.name}}</h2>
+    <h1>US{{iten.item.start_price}}</h1>
+    <p>{{iten.item.description}}</p>
+    <p>{{iten.item.user.username}}</p>
+    {%endfor%}
+{%endblock%}
