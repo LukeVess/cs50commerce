@@ -1,10 +1,31 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+{%if items%}
+ <div id="item_container">
     {%for iten in items%}
-    <h2>{{iten.item.name}}</h2>
-    <h1>US{{iten.item.start_price}}</h1>
-    <p>{{iten.item.description}}</p>
-    <p>{{iten.item.user.username}}</p>
-    {%endfor%}
+    <div id="item_listing">
+    <a  id="item_name" href="{%url 'item_list' item_id=iten.item.id%}">
+        <b><p class="truncate-text">{{iten.item.name}}</p></b></a>
+    <a href="{%url 'item_list' item_id=iten.item.id%}">
+    <img id="item_image_list" src="{{iten.item.img.url}}" alt="{{ iten.item.name }}">
+    </a>
+    <h1>${{iten.item.actual_price}}</h1>
+    <p><b>Created By: </b>{{iten.item.user.username}}</p>
+    {%if not iten.item.sold%}
+    <button onclick="window.location.href='{% url 'item_list' item_id=iten.item.id %}'" class="button_b">
+        <b>BID</b>
+    </button>
+    {%else%}
+    <button style="cursor: not-allowed; opacity: 0.5;" class="button_b">
+        <b>SOLD</b>
+    </button>    
+    {%endif%}
+    </div>
+    {% endfor %}
+</div>
+{%else%}
+<h1>No items</h1>
+{%endif%}
+
 {%endblock%}

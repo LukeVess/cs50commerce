@@ -30,7 +30,7 @@ class Items(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    comment = models.TextField()
+    comment = models.TextField(max_length=200)
     item = models.ForeignKey(Items, on_delete=models.CASCADE, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
 

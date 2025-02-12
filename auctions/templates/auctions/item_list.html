@@ -41,9 +41,15 @@
 <hr>
 
 {%for comment in comments%}
-    <p>{{comment.user.username}}</p>
-    <p>{{comment.comment}}</p>
-    <p>{{comment.created_at}}</p>
-    <hr>
+<div id="commentary">
+    <div id="commentary_text">
+        <p><b>Author:</b> {{ comment.user.username }}</p>
+        <div id="commentary_comment">
+            <p>{{ comment.comment }}</p> <!-- This will now wrap properly -->
+        </div>
+        <p><b>Created at:</b> {{ comment.created_at }}</p>
+    </div>
+</div>
+<hr>
 {%endfor%}
 {%endblock%}

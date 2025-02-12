@@ -36,7 +36,7 @@ class Close(ModelForm):
 def index(request):
 
     return render(request, "auctions/index.html", {
-        "items": Items.objects.filter(sold=False)
+        "items": Items.objects.filter(sold=False).order_by('-created_at')
     })
 
 
@@ -119,9 +119,9 @@ def watchlist(request):
     else:
 
         user_watchlist = Watchlist.objects.filter(user=request.user)
-        user_watchlist_items = user_watchlist.filter(item__sold=False)
+        
         return render(request, "auctions/watchlist.html", {
-            "items": user_watchlist_items
+            "items": user_watchlist
         })
 
 def item_list(request, item_id):

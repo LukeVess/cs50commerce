@@ -6,16 +6,18 @@
     {%for item in items%}
     <div id="item_listing">
     <a  id="item_name" href="{%url 'item_list' item_id=item.id%}">
-        <p class="truncate-text">{{item.name}}</p></a>
+        <b><p class="truncate-text">{{item.name}}</p></b></a>
     <a href="{%url 'item_list' item_id=item.id%}">
     <img id="item_image_list" src="{{item.img.url}}" alt="{{ item.name }}">
     </a>
-    <h1>US{{item.actual_price}}</h1>
-    <p>{{item.description}}</p>
-    <p>{{item.user.username}}</p>
+    <h1>${{item.actual_price}}</h1>
+    <p><b>Created By: </b>{{item.user.username}}</p>
+    <button onclick="window.location.href='{% url 'item_list' item_id=item.id %}'" class="button_b">
+        <b>BID</b>
+    </button>
     <form  action="{% url 'watchlist' %}" method="post"> 
         {% csrf_token %}
-    <button name="item" value="{{item.id}}">Watchlist</button>
+    <button class="buttons_a"name="item" value="{{item.id}}">Watchlist</button>
     </form> 
     </div>
 
