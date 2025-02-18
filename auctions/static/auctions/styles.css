@@ -1,119 +1,459 @@
 body {
-    padding: 10px;
+  padding: 10px;
 }
 
-#item_listing{
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 8px 20px 30px #cecece;
-    width:250px;
-    padding: 16px;
-    
-    
+#item_listing {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 8px 20px 30px #cecece;
+  width: 250px;
+  padding: 16px;
 }
 
 .truncate-text {
-    display: block; /* Ensures text-overflow works */
-    width: 100%; /* Constrain width */
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Hides overflowing text */
-    text-overflow: ellipsis; /* Adds "..." when text overflows */
-    font-size: 25px;
-    text-transform: uppercase;
-    color: black;
-    position: relative;
-    text-decoration: none;
-
+  display: block; /* Ensures text-overflow works */
+  width: 100%; /* Constrain width */
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds "..." when text overflows */
+  font-size: 25px;
+  text-transform: uppercase;
+  color: black;
+  position: relative;
+  text-decoration: none;
 }
 
-.truncate-text:hover{
-    text-decoration: none;
+.truncate-text:hover {
+  text-decoration: none;
 }
 
 #item_name {
-    width: 100%; /* Ensures full width */
-    text-align: center; /* Centers text horizontally */
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Hides overflow */
-    text-overflow: ellipsis; /* Adds "..." if text overflows */
-    display: block; /* Ensures text-overflow works */
-    text-decoration: none;
+  width: 100%; /* Ensures full width */
+  text-align: center; /* Centers text horizontally */
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflow */
+  text-overflow: ellipsis; /* Adds "..." if text overflows */
+  display: block; /* Ensures text-overflow works */
+  text-decoration: none;
 }
 
 #item_container {
-    display: flex;
-    align-items: flex-start; /* Aligns items closely */
-    flex-wrap: wrap;
-    gap: 100px;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  align-items: flex-start; /* Aligns items closely */
+  flex-wrap: wrap;
+  gap: 100px;
+  width: 100%;
+  justify-content: center;
 }
 
 #item_image_list {
-    width: 150px;
-    height: 150px;
-    border-radius: 8px;
-    box-shadow: 8px 20px 30px #cecece;
-    transition: width 0.3s, height 0.3s, box-shadow 0.3s;
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  box-shadow: 8px 20px 30px #cecece;
+  transition: width 0.3s, height 0.3s, box-shadow 0.3s;
 }
 
 #item_image_list:hover {
-    width: 175px;
-    height: 175px;
-    box-shadow: 16px 40px 60px #cecece;
+  width: 175px;
+  height: 175px;
+  box-shadow: 16px 40px 60px #cecece;
 }
 
-.buttons_a{
-    background-color: #FFFFF0;
-    border-radius: 30px;
-    cursor:pointer;
-    box-shadow: #422800 3px 3px 0 0;
-    transition: 0.3s;
+.buttons_a {
+  background-color: #fffff0;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: #422800 3px 3px 0 0;
+  transition: 0.3s;
 }
 
-.buttons_a:hover{
-    box-shadow: -3px -3px 0 0;
-    background-color: #FFFDD0;
+.buttons_a:hover {
+  box-shadow: -3px -3px 0 0;
+  background-color: #fffdd0;
 }
 
-.button_b{
-    margin-bottom: 5px;
-    margin-top: -5px;
-    background-color:#0079BC;
-    color: white;
-    width: 50%;
-    height: 70%;
-    border-radius: 5px;
-    transition: 0.3s;
-    text-align: center;
-    text-decoration: none;
+.button_b {
+  margin-bottom: 5px;
+  margin-top: -5px;
+  background-color: #0079bc;
+  color: white;
+  width: 50%;
+  height: 70%;
+  border-radius: 5px;
+  transition: 0.3s;
+  text-align: center;
+  text-decoration: none;
 }
 
-.button_b:hover{
-    box-shadow: #422800  2px 2px;
-
+.button_b:hover {
+  box-shadow: #422800 2px 2px;
 }
 
 #commentary {
-    border-radius: 10px;
-    box-shadow: 10px 10px 10px 5px black; /* Fixed order */
-    width: 75%;
-    padding: 10px; /* Adds spacing inside the box */
-    word-wrap: break-word; /* Ensures long words break */
-    overflow-wrap: break-word; /* Alternative for compatibility */
-    white-space: normal; /* Allows text to wrap */
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 5px black; /* Fixed order */
+  width: 75%;
+  padding: 10px; /* Adds spacing inside the box */
+  word-wrap: break-word; /* Ensures long words break */
+  overflow-wrap: break-word; /* Alternative for compatibility */
+  white-space: normal; /* Allows text to wrap */
 }
 
 #commentary_text {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 #commentary_comment {
-    word-wrap: break-word; /* Ensures long words wrap */
-    overflow-wrap: break-word; /* Alternative for compatibility */
-    white-space: normal; /* Allows text to wrap */
+  word-wrap: break-word; /* Ensures long words wrap */
+  overflow-wrap: break-word; /* Alternative for compatibility */
+  white-space: normal; /* Allows text to wrap */
 }
 
+.page_content {
+  padding: 65px;
+}
+
+.product_details_container {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+  min-width: 800px;
+}
+
+.product_details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 60%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+#image_detail {
+  border-radius: 10px;
+  width: 30%;
+}
+
+.product_title {
+  font-size: 24px;
+  font-family: "Inter";
+  color: #1e1e1e;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.product_description {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+  color: #757575;
+  max-width: 100%; /* Prevents text from exceeding container */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal; /* Allows text to wrap */
+  overflow: hidden; /* Ensures no spillover */
+  text-align: justify;
+}
+
+.price {
+  display: flex;
+}
+
+.product_price {
+  font-family: "inter";
+  font-size: 48px;
+  font-weight: 700;
+  color: black;
+}
+
+#dolar_sign {
+  font-family: "inter";
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  margin-top: 9px;
+}
+
+.biding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.button_bid {
+  background-color: black;
+  border-radius: 10px;
+  height: 40px;
+  width: 73px;
+}
+
+#item_bid {
+  font-size: 16px;
+  color: white;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  transition: transform 0.1s ease-in-out;
+}
+
+#item_bid_bid {
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  width: 25px;
+  height: 16px;
+}
+
+.custom-bid-input {
+  width: 413px;
+  height: 40px;
+  border-radius: 10px;
+  min-width: 240px;
+  border-color: #d9d9d9;
+  transition: 0.3s;
+}
+
+.custom-bid-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+.button_bid:hover #item_bid {
+  transform: rotate(45deg);
+}
+
+.comments-section {
+  width: 30%;
+}
+
+.comment-header {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-creator {
+  text-transform: capitalize;
+  font-family: "inter";
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.slash {
+  text-transform: capitalize;
+  font-family: "inter";
+  font-size: 16px;
+  font-weight: 400;
+  color: #1e1e1e;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.commentary_comment {
+  overflow-wrap: break-word;
+  white-space: normal; /* Allows text to wrap */
+  overflow: hidden; /* Ensures no spillover */
+  text-align: justify;
+  font-family: "inter";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #1e1e1e;
+}
+
+.comment-creator-time {
+  font-family: "inter";
+  font-size: 16px;
+  font-weight: 400;
+  color: #757575;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button_comment_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.custom-comment-input {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
+  resize: none;
+}
+
+.comments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment-section-comment {
+  font-family: "Inter";
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+#close_bid {
+  background-color: black;
+  width: 110px;
+  transition: 0.3s;
+}
+
+#close_bid_bid {
+  color: white;
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  padding-right: 5px;
+}
+
+/* Initially, hide the closed lock */
+#lock-lock {
+  display: none;
+}
+
+#lock-open {
+  color: white;
+}
+
+#close_bid:hover {
+  background-color: #da373c;
+}
+/* When hovering over the container */
+#close_bid:hover #lock-open {
+  display: none; /* Hide the open lock */
+}
+
+#close_bid:hover #lock-lock {
+  display: inline-flex;
+  color: white;
+}
+
+#text_sold_to {
+  text-transform: capitalize;
+  font-family: "inter";
+  font-size: 36px;
+  font-weight: 600;
+  color: #1e1e1e;
+}
+
+.custom_category_dropdown {
+  border-radius: 10px;
+}
+
+.category_forms {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.button_category {
+  border-radius: 10px;
+  background-color: #000000;
+  color: white;
+  font-family: "inter";
+  font-size: 16px;
+  font-weight: 400;
+  transition: 0.3s;
+}
+
+.button_category:hover {
+  background-color: #727070;
+}
+
+.form_create_item {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: -30px;
+}
+
+.form_text_title {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 26px;
+}
+.custom_item_create_name {
+  border-radius: 10px;
+  width: 60%;
+  padding-left: 10px;
+}
+
+.custom_item_create_price {
+  border-radius: 10px;
+  width: 20%;
+}
+
+.custom_item_description {
+  border-radius: 10px;
+  width: 60%;
+  height: 225px;
+  resize: none;
+}
+
+.custom_item_category {
+  border-radius: 10px;
+  width: 60%;
+}
+
+.create_item_labels {
+  font-family: "inter";
+  font-weight: 600;
+  font-size: 16px;
+}
+
+#button_create {
+  width: 10%;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.form_container_left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.form_container_right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  margin-left: -200px;
+}

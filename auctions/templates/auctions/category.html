@@ -1,35 +1,56 @@
-{%extends "auctions/layout.html"%}
-
-{%block body%}
-<form action="{% url 'category'%}" method="post"> 
-    {% csrf_token %}
-    {{category}}
-    <input type="submit"/>
-</form> 
+{%extends "auctions/layout.html"%} {%block body%}
+<form action="{% url 'category'%}" method="post" class="category_forms">
+  {% csrf_token %} {{category}}
+  <button type="submit" class="button_category">Submit</button>
+</form>
 {%if items%}
- <div id="item_container">
-    {%for item in items%}
-    <div id="item_listing">
-    <a  id="item_name" href="{%url 'item_list' item_id=item.id%}">
-        <b><p class="truncate-text">{{item.name}}</p></b></a>
+<div id="item_container">
+  {%for item in items%}
+  <div id="item_listing">
+    <a id="item_name" href="{%url 'item_list' item_id=item.id%}">
+      <b><p class="truncate-text">{{item.name}}</p></b></a
+    >
+    {%if not item.sold%}
     <a href="{%url 'item_list' item_id=item.id%}">
-    <img id="item_image_list" src="{{item.img.url}}" alt="{{ item.name }}">
+      <img id="item_image_list" src="{{item.img.url}}" alt="{{ item.name }}" />
     </a>
+    {%else%}
+    <a href="{%url 'item_list' item_id=item.id%}">
+      <img
+        id="item_image_list"
+        src="{{item.img.url}}"
+        alt="{{ item.name }}"
+        style="filter: grayscale(100%)"
+      />
+    </a>
+    {%endif%}
     <h1>${{item.actual_price}}</h1>
     <p><b>Created By: </b>{{item.user.username}}</p>
-    <button onclick="window.location.href='{% url 'item_list' item_id=item.id %}'" class="button_b">
-        <b>BID</b>
+    {%if not item.sold%}
+    <button
+      onclick="window.location.href='{% url 'item_list' item_id=item.id %}'"
+      class="button_b"
+    >
+      <b>BID</b>
     </button>
-    <form  action="{% url 'watchlist' %}" method="post"> 
-        {% csrf_token %}
-    <button class="buttons_a"name="item" value="{{item.id}}">Watchlist</button>
-    </form> 
-    </div>
+    <form action="{% url 'watchlist' %}" method="post">
+      {% csrf_token %}
+      <button class="buttons_a" name="item" value="{{item.id}}">
+        Watchlist
+      </button>
+    </form>
+    {%else%}
+    <button style="cursor: not-allowed; opacity: 0.5" class="button_b">
+      <b>SOLD</b>
+    </button>
+    <p>Sold to {{item.owner}}</p>
+    {%endif%}
+  </div>
 
-    {% endfor %}
+  {% endfor %}
 </div>
 {%else%}
-<h1>No items</h1>
-{%endif%}
-
-{%endblock%}
+<span style="font-size: 24px; font-weight: 600; font-family:'inter"
+  >Choose an Available Category</span
+>
+{%endif%} {%endblock%}

@@ -7,26 +7,70 @@ from django.urls import reverse
 from .models import User, Category, Items, Comment, Watchlist, Bid
 from django import forms
 from django.forms import ModelForm
+from django.contrib import messages
 
 class Create_List(ModelForm):
     class Meta:
         model = Items
         fields = ["name", "img", "start_price", "description", "category"]
+        widgets = {
+            "name": forms.TextInput(attrs={
+                "class": "custom_item_create_name",
+                "placeholder": "Add a name...",
+                   }),
+            "start_price": forms.NumberInput(attrs={
+                "class": "custom_item_create_price",
+                "placeholder": "Add a price",
+            }),
+            "description": forms.Textarea(attrs={
+                "class":  "custom_item_description",
+                "placeholder": "Add a description",
+            }),
+
+            "category": forms.Select(attrs={
+                "class": "custom_item_category",
+                "placeholder": "Select a Category",
+            })
+            
+        }
 
 class Create_Comment(ModelForm):
     class Meta:
         model = Comment
         fields = ["comment"]
+        widgets = {
+            "comment": forms.Textarea(attrs={
+            "class": "custom-comment-input", 
+            "placeholder": "Add a comment...", 
+            })
+        }
+        labels = {"comment": ""}
 
 class M_Category(ModelForm):
     class Meta:
         model = Items
-        fields = ["category"]
+        fields = ["category"]  # Only "category" field
+        widgets = {
+            "category": forms.Select(attrs={
+                "class": "custom_category_dropdown",  # Apply custom class here
+            })
+        }
+        labels = {
+            "category": ""  # Set empty label for "category"
+        }
 
 class Biding(ModelForm):
     class Meta:
         model = Bid
         fields = ["value"]
+        widgets = {
+            "value": forms.NumberInput(attrs={
+                "class": "custom-bid-input", 
+                "placeholder": "Bid Amount", 
+                "inputmode": "numeric"  # Ensures numeric keyboard on mobile devices
+            })
+        }
+        labels = {"value": ""}
 
 class Close(ModelForm):
     class Meta:
@@ -158,7 +202,7 @@ def create_comment(request, item_id):
             comment.user = request.user
             comment.item = get_object_or_404(Items, id=item_id)
             comment.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("item_list", args=[item_id]))
     return HttpResponseRedirect(reverse("item_list", args=[item_id]))
 
 @login_required
@@ -203,6 +247,9 @@ def close(request, item_id):
             item = get_object_or_404(Items, id=item_id)
             #owner = owner.objects.order_by("-created_at").first()
             owner = Bid.objects.filter(item=item.id).order_by("-created_at").first()
+            if owner is None:
+                messages.error(request,'Your item dont have bids on it! ')
+                return HttpResponseRedirect(reverse("item_list", kwargs={"item_id": item_id})) 
             item.sold = True
             item.owner = owner.user
             item.save()

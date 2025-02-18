@@ -1,9 +1,30 @@
-{% extends "auctions/layout.html" %}
-
-{%block body%}
-<form action="{% url 'create_list' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit">
+{% extends "auctions/layout.html" %} {%block body%}
+<form
+  action="{% url 'create_list' %}"
+  method="post"
+  enctype="multipart/form-data"
+  class="form_create_item"
+>
+  <span class="form_text_title">Create a new Item</span>
+  {% csrf_token %}
+  <div class="form_container">
+    <div class="form_container_left">
+      <span class="create_item_labels">Add a name</span>
+      {{ form.name }}
+      <span class="create_item_labels">Add a image</span>
+      {{ form.img }}
+      <span class="create_item_labels">Add the base price</span>
+      {{ form.start_price }}
+    </div>
+    <div class="form_container_right">
+      <span class="create_item_labels">Add description</span>
+      {{ form.description }}
+      <span class="create_item_labels">Select a category</span>
+      {{ form.category }}
+      <button type="submit" class="button_category" id="button_create">
+        Create
+      </button>
+    </div>
+  </div>
 </form>
 {% endblock%}

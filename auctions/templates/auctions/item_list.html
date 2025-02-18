@@ -1,55 +1,104 @@
-{%extends "auctions/layout.html"%}
-
-{%block body%}
-<h2>{{item.name}}</h2>
-<img width="100px" height="100px" src="{{item.img.url}}" alt="{{ item.name }}">
-<h2>{{item.description}}</h2>
-<h2>{{item.actual_price}}</h2>
-
-
-{%if close%}
-    {%if not item.sold%}
-<!-- close que tem que aparecer para o dono e deve ficar estatico depois do bid-->
-<form action="{%url 'close' item_id=item.id%}" method="post">
-    {%csrf_token%}
-    {{close}}
-    <input type="submit"/>
-</form>
-    {%else%}
-    <h2>Vendido para {{item.owner}}</h2>
-    {%endif%}
-{%endif%}
-
-
-<form  action="{% url 'comment' item_id=item.id %}" method="post"> 
-    {% csrf_token %}
-    {{comment}}
-    <input type="submit"/>
-</form> 
-<hr>
-
-{%if not item.sold%}
-<form action="{% url 'bid' item_id=item.id %}" method="post">
-    {% csrf_token %}
-    {{bid}}
-<input type="submit"/>
-</form>
-{%else%}
-<p>Este item já foi vendido e não está disponível para lances.</p>
-{%endif%}
-
-<hr>
-
-{%for comment in comments%}
-<div id="commentary">
-    <div id="commentary_text">
-        <p><b>Author:</b> {{ comment.user.username }}</p>
-        <div id="commentary_comment">
-            <p>{{ comment.comment }}</p> <!-- This will now wrap properly -->
+{%extends "auctions/layout.html"%} {%block body%}
+<div class="page_content">
+  <div class="product_details_container">
+    <img src="{{item.img.url}}" alt="{{ item.name }}" id="image_detail" />
+    <div class="product_details">
+      <div class="details">
+        <div class="product_title">
+          
+          <span>{{item.name}}</span>
         </div>
-        <p><b>Created at:</b> {{ comment.created_at }}</p>
+        <div class="price">
+          <span id="dolar_sign">$</span>
+          <div class="product_price">
+            <span>{{item.actual_price}}</span>
+          </div>
+        </div>
+        <div class="product_description">
+          <span>{{item.description}}</span>
+        </div>
+      </div>
+
+      {% if messages %}
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
+      errorModal.show();
+    });
+  </script>
+  
+{% endif %}
+        {%if close%} 
+          {%if not item.sold%}
+        <form action="{%url 'close' item_id=item.id%}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="button_bid" id="close_bid"><span id="close_bid_bid">Close</span><i class="fa-solid fa-lock-open" id="lock-open"></i> <i class="fa-solid fa-lock" id="lock-lock"></i></button>
+        </form>
+          {%else%}
+        <span id="text_sold_to">Sold to {{item.owner}}</span id="text_sold_to">
+          {%endif%} 
+        {%else%}
+        {%if not item.sold%}
+				<div class="bid">
+        <form class="biding" action="{% url 'bid' item_id=item.id %}" method="post">
+          {% csrf_token %} {{bid}}
+          <button type="submit" class="button_bid"><i class="fa-solid fa-gavel" id="item_bid"></i><span id="item_bid_bid">Bid</span></button>
+        </form>
+				</div>
+        {%else%}
+        <span id="text_sold_to">Sold to {{item.owner}}</span id="text_sold_to">
+        {%endif%}
+        {%endif%}
+      </div>
+    </div>
+  
+  <div class="comments-section">
+    <div class="comment-section-comment">
+    <span>Comments</span>
+    </div>
+    {%if not item.sold%}
+    <form action="{% url 'comment' item_id=item.id %}" method="post" class="comment-form">
+      {% csrf_token %} {{comment}}
+      <div class="button_comment_container">
+      <button type="submit" class="button_bid" id="button_submit"><span id="item_bid_bid">Submit</span></button>
+      </div>
+    </form>
+    {%endif%}
+    <div class="comments-list">
+    {%for comment in comments%}
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-creator"><span>{{ comment.user.username }}</span></div>
+        <div class="slash"><span>-</span></div>
+        <div class="comment-creator-time"><span>{{ comment.created_at|date:"d M y - H:i A" }}</span></div>
+      </div>
+      <div class="commentary_comment">
+          <span>{{ comment.comment }}</span>
+      </div>
+    </div>
+    {%endfor%}
+    </div>
+  </div>
 </div>
-<hr>
-{%endfor%}
+</div>
 {%endblock%}

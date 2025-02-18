@@ -17,7 +17,7 @@ class Items(models.Model):
     name = models.CharField(max_length=64)
     img = models.ImageField(upload_to ='uploads/')
     start_price = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal("0.00"), validators=[MinValueValidator(Decimal("0.01"))])
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
     sold = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="items")
@@ -30,7 +30,7 @@ class Items(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    comment = models.TextField(max_length=200)
+    comment = models.TextField(max_length=500)
     item = models.ForeignKey(Items, on_delete=models.CASCADE, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
 
